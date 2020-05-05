@@ -93,6 +93,7 @@ def IndexCreate(dname, idx_type,
 
 ###############################################################################
 # search closest vector for all languages pairs and calculate error rate
+# updating this function to output binary output for Classification task and also output index for Corpus cleaning.
 
 def IndexSearchMultiple(data, idx, verbose=False, texts=None, print_errors=False):
     nl = len(data)
