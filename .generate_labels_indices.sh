@@ -12,6 +12,8 @@ model_dir="${LASER}/models"
 encoder="${model_dir}/bilstm.93langs.2018-12-26.pt"
 bpe_codes="${model_dir}/93langs.fcodes"
 edir="embed"
+
+
 python ${LASER}//source/similarity_search.py --bpe-codes ${bpe_codes} --encoder ${encoder} \
          --base-dir . --data <data_path_without_language_ID> \
          --output ${edir}/<unique_name_for_output_embddings>
