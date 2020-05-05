@@ -18,7 +18,7 @@ import faiss
 import os.path
 import sys
 import numpy as np
-
+import pandas as pd
 #-------------------------------------------------------------
 # Get list of fnames:
 #  - we loop over the list of given languages
@@ -95,7 +95,10 @@ def IndexCreate(dname, idx_type,
 # search closest vector for all languages pairs and calculate error rate
 # updating this function to output binary output for Classification task and also output index for Corpus cleaning.
 
-def IndexSearchMultiple(data, idx, verbose=False, texts=None, print_errors=False):
+
+def IndexSearchMultiple(data, idx, location, verbose=False, texts=None, print_errors=False):
+    cnt=0
+    match_result = []
     nl = len(data)
     nbex = data[0].shape[0]
     err = np.zeros((nl, nl)).astype(float)
@@ -119,13 +122,17 @@ def IndexSearchMultiple(data, idx, verbose=False, texts=None, print_errors=False
                                       .format(texts[i2][p].strip(), texts[i2][I[p,0]].strip()))
                     err[i1, i2] = e1 / nbex
                 else:  # do index based comparision
+                    match_result.append(np.equal(I.reshape(nbex), ref))
                     err[i1, i2] \
                         = (nbex - np.equal(I.reshape(nbex), ref)
                            .astype(int).sum()) / nbex
+                    pd.DataFrame(np.array(I.reshape(nbex)).transpose()).to_csv(str(cnt)+'_class/'+str(location)+'_laser.csv', sep=',' ,header= None)
+                    cnt+=1
                 if verbose:
                     print(' - similarity error {:s}/{:s}: {:5d}={:5.2f}%'
                           .format(args.langs[i1], args.langs[i2],
                                   err[i1, i2], 100.0 * err[i1, i2]))
+    pd.DataFrame(np.array(match_result).transpose()).to_csv('classification_labels.out', sep=',' ,mode='a',  header= None)
     return err
 
 
