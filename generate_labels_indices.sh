@@ -16,4 +16,5 @@ edir="embed"
 
 python ${LASER}//source/similarity_search.py --bpe-codes ${bpe_codes} --encoder ${encoder} \
          --base-dir . --data <data_path_without_language_ID> \
-         --output ${edir}/<unique_name_for_output_embddings>
+         --output ${edir}/<unique_name_for_output_embddings> \
+         --lang en fr --verbose
