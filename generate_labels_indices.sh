@@ -2,7 +2,7 @@
 # Modification for creating labels for Classification task and generating matched Indices for Corpus Cleaning.
 # No changes was made in LASER model, only modified the output of the model.
 
-export LASER='./'
+export LASER='<LASER_Directory>'
 if [ -z ${LASER+x} ] ; then
   echo "Please set the environment variable 'LASER'"
   exit
