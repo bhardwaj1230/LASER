@@ -2,7 +2,7 @@
 # Modification for creating labels for Classification task and generating matched Indices for Corpus Cleaning.
 # No changes was made in LASER model, only modified the output of the model.
 
-export LASER='<your_directroy>/LASER'
+export LASER='./'
 if [ -z ${LASER+x} ] ; then
   echo "Please set the environment variable 'LASER'"
   exit
@@ -15,6 +15,6 @@ edir="embed"
 
 
 python ${LASER}//source/similarity_search.py --bpe-codes ${bpe_codes} --encoder ${encoder} \
-         --base-dir . --data <data_path_without_language_ID> \
-         --output ${edir}/<unique_name_for_output_embddings> \
+         --base-dir . --data /fs/hestia_Hnrc/ict/bha101/nrc_collab_aitq/mac_hum/laser/xlm/data/test.en-fr \
+         --output ${edir}/test_laser \
          --lang en fr --verbose

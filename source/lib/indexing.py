@@ -126,7 +126,7 @@ def IndexSearchMultiple(data, idx, location, verbose=False, texts=None, print_er
                     err[i1, i2] \
                         = (nbex - np.equal(I.reshape(nbex), ref)
                            .astype(int).sum()) / nbex
-                    pd.DataFrame(np.array(I.reshape(nbex)).transpose()).to_csv(str(cnt)+'_class/'+str(location)+'_laser.csv', sep=',' ,header= None)
+                    pd.DataFrame(np.array(I.reshape(nbex)).transpose()).to_csv(str(cnt)+'_class_laser.csv', sep=',' ,header= None)
                     cnt+=1
                 if verbose:
                     print(' - similarity error {:s}/{:s}: {:5d}={:5.2f}%'
