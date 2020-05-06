@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 # Copyright (c) Facebook, Inc. and its affiliates.
 # All rights reserved.
@@ -19,6 +20,8 @@ import sys
 import argparse
 import faiss
 import numpy as np
+
+
 
 # get environment
 assert os.environ.get('LASER'), 'Please set the enviornment variable LASER'
@@ -51,6 +54,7 @@ parser.add_argument('--bpe-codes', type=str, required=True,
 parser.add_argument('--verbose', action='store_true',
     help='Detailed output')
 
+
 # options for encoder
 parser.add_argument('--encoder', type=str, required=True,
     help='encoder to be used')
@@ -80,6 +84,7 @@ if args.textual:
 
 enc = EncodeLoad(args)
 
+
 out_dir = os.path.dirname(args.output)
 if not os.path.exists(out_dir):
     print(' - creating directory {}'.format(out_dir))
@@ -107,7 +112,8 @@ for l in args.lang:
                          verbose=args.verbose, save_index=False)
     all_data.append(d)
     all_index.append(idx)
-
+    loc_dir=args.output.strip('embed/')
 err = IndexSearchMultiple(all_data, all_index, texts=all_texts,
-                          verbose=False, print_errors=False)
+                          verbose=False, print_errors=False,location=loc_dir)
+
 IndexPrintConfusionMatrix(err, args.lang)
